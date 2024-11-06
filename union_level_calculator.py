@@ -71,7 +71,10 @@ def get_job_count_key(job, level):
         tier = 'C'
     class_branch = (job - job // 1000 * 1000) // 100
     if class_branch == 7:
-        class_branch = 3
+        if job // 1000 == 2:
+            class_branch = 3
+        elif job // 1000 == 3:
+            class_branch = 1
     if tier in ['C', 'B', 'A']:
         return tier
     elif tier == 'S':

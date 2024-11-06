@@ -38,7 +38,7 @@ class MultiSelectList(wx.Frame):
         vbox_right = wx.BoxSizer(wx.VERTICAL)
 
         self.check_list_box = wx.CheckListBox(panel, choices=[
-            f"Lv. {item['level']} | {item['char_name']} | 职业：{item['jobName']} | {self.format_attributes(item)}" for item in data
+            f"Lv. {item['level']} | {item['char_name']} | 职业：{item['jobName']} | {item['tier']} | {self.format_attributes(item)}" for item in data
         ])
         self.check_list_box.Bind(wx.EVT_CHECKLISTBOX, self.on_item_toggled)
 
@@ -75,7 +75,7 @@ class MultiSelectList(wx.Frame):
         self.Centre()
 
     def format_attributes(self, item):
-        return ', '.join(f"{key}：{value}" for key, value in item.items() if key not in ["char_name", "job", "level", "jobName"])
+        return ', '.join(f"{key}：{value}" for key, value in item.items() if key not in ["char_name", "job", "level", "jobName", "tier"])
 
     def on_item_toggled(self, event):
         selected_indices = self.check_list_box.GetCheckedItems()
@@ -108,7 +108,7 @@ class MultiSelectList(wx.Frame):
         summed_attributes = {}
         for item in items:
             for key, value in item.items():
-                if key not in ["char_name", "job", "level", "jobName"]:
+                if key not in ["char_name", "job", "level", "jobName", "tier"]:
                     if key in summed_attributes:
                         summed_attributes[key] += value
                     else:

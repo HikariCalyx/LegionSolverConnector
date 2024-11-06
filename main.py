@@ -61,8 +61,9 @@ if __name__ == '__main__':
 
     for i in class_combo:
         i.update(ulc.get_union_effect(i['job'], i['level']))
+        i.update({'tier': ulc.get_job_count_key(i['job'], i['level'])})
     for i in class_combo:
-        if i['job'] % 100 == 0 or i['job'] % 100 == 1:
+        if i['job'] % 100 == 0 or i['job'] % 100 == 1 or i['level'] < 60:
             class_combo.remove(i)
     legion_level = ulc.get_union_level(class_combo)
     print("Your Maple Legion level is: ", legion_level)
